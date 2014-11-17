@@ -12,7 +12,7 @@
 //============================================================================
 //                                  Main
 //============================================================================
-int main(int argc, char* argv[])//argc et argv par defaut pas utilise ici.
+int main(int argc, const char* argv[])//argc et argv par defaut pas utilise ici.
 {
   //--------------------------------------------------------------------------
   // Read file "gargouille.ppm" into image (width and height)
@@ -23,8 +23,9 @@ int main(int argc, char* argv[])//argc et argv par defaut pas utilise ici.
   int Newheight=0;
   //creating a void picture
   printf("%d\n",Newwidth);
-  img * image;
-  image=(img*)malloc(sizeof(img));
+  //img * image;
+  //image=(img*)malloc(sizeof(img));
+  img * image= new img; 
   ppm_read_from_file(image,"gargouille.ppm");
   Newwidth=image->width;
   Newheight=image->heigth;
@@ -39,11 +40,13 @@ int main(int argc, char* argv[])//argc et argv par defaut pas utilise ici.
   int height_bw = height;
   u_char* image_bw = (u_char*) malloc(3 * width * height * sizeof(*image_bw));*/
   //creating a void picture
-  img* image_bw;
-  image_bw=(img*)malloc(sizeof(img));
+  //img* image_bw;
+  //image_bw=(img*)malloc(sizeof(img));
+  img * image_bw= new img; 
   image_bw->width=Newwidth;
   image_bw->heigth=Newheight;
-  u_char* Newimage2= (u_char*) malloc(3 * image_bw->width * image_bw->heigth * sizeof(*Newimage2));
+  //u_char* Newimage2= (u_char*) malloc(3 * image_bw->width * image_bw->heigth * sizeof(*Newimage2));
+  u_char * Newimage2= new u_char [3 * image_bw->width * image_bw->heigth ]; 
   image_bw->data=Newimage2;
   memcpy(image_bw->data, image->data, 3 * image_bw->width * image_bw->heigth * sizeof(*image_bw->data));
 
@@ -69,13 +72,15 @@ int main(int argc, char* argv[])//argc et argv par defaut pas utilise ici.
   
     
   
-  u_char* Newimage_small = NULL;
+  //u_char* Newimage_small = NULL;
 
-  img * image_small;
-  image_small=(img*)malloc(sizeof(img));
+  //img * image_small;
+  //image_small=(img*)malloc(sizeof(img));
+  img * image_small= new img; 
   image_small->width=width_small; 
   image_small->heigth=height_small;
-  Newimage_small = (u_char*) malloc(3 * width_small * height_small * sizeof(*Newimage_small));
+  //Newimage_small = (u_char*) malloc(3 * width_small * height_small * sizeof(*Newimage_small));
+  u_char * Newimage_small= new u_char [3 * width_small * height_small]; 
   image_small->data=Newimage_small;
   
   memcpy(image_small->data, image->data, 3 * image_small->width * image_small->heigth * sizeof(*image_small->data));

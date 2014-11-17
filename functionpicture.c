@@ -3,12 +3,14 @@
 #include<math.h>
 #include <assert.h>
 #include"functionpicture.h"
+#include <string.h>
+
 
 //============================================================================
 //                           Function declarations
 //============================================================================
 
-void ppm_write_to_file(img picture, char* namefile)// FILE* file)
+void ppm_write_to_file(img picture, const char * namefile)// FILE* file)
 {
 	
   //to open a file
@@ -24,8 +26,8 @@ void ppm_write_to_file(img picture, char* namefile)// FILE* file)
 }
 
 
-//void ppm_read_from_file(int *width, int *height, u_char** data, char*namefile)// FILE* file)
-void ppm_read_from_file(img* picture, char* namefile)
+//void ppm_read_from_file(int *width, int *height, const u_char * ** data, const char *namefile)// FILE* file)
+void ppm_read_from_file(img* picture, const char * namefile)
 {
   //to open a file
   FILE* file;
@@ -33,8 +35,9 @@ void ppm_read_from_file(img* picture, char* namefile)
   // Read file header
   fscanf(file, "P6\n%d %d\n255\n", &picture->width, &picture->heigth);//comment faire??
 
-  // Allocate memory according to width and height
-  picture->data = (u_char*) malloc(3 * (picture->width) * (picture->heigth) * sizeof(picture->data));
+  // Allocate memory according to data.
+  //picture->data = (u_char *) malloc(3 * (picture->width) * (picture->heigth) * sizeof(picture->data));
+	picture->data= new u_char [3 * (picture->width) * (picture->heigth)]; 
 
   // Read the actual image data
   fread(picture->data, 3, (picture->width) * (picture->heigth), file);
@@ -72,14 +75,15 @@ void ppm_desaturate(img * picture)
 
 
 
-//void ppm_shrink(u_char** image, int *width, int *height, int factor)
+//void ppm_shrink(const u_char * ** image, int *width, int *height, int factor)
 void ppm_shrink(img* picture, int factor)
 {
   // Compute new image size and allocate memory for the new image
   int new_width   = (picture->width) / factor;
   int new_height  = (picture->heigth) / factor;
   
-  u_char* new_image = (u_char*) malloc(3 * new_width * new_height * sizeof(*new_image));
+  //u_char *new_image = (u_char *) malloc(3 * new_width * new_height * sizeof(*new_image));
+	u_char* new_image= new u_char [3 * new_width * new_height ]; 
 
   // Precompute factor^2 (for performance reasons)
   int factor_squared = factor * factor;
