@@ -181,7 +181,7 @@ void img::ppm_shrink(int factor)
   heigth = new_height;
 
   // Update image
-  free(data);
+  delete(data);
   data = new_image;
 }
 

@@ -53,8 +53,8 @@ int main(int argc, const char* argv[])//argc et argv par defaut pas utilise ici.
   image_bw.ppm_write_to_file("gargouille_BW.ppm");
   //fclose(ppm_output);
 
-  // Free the desaturated image
-  free(image_bw.GetData());
+  // delete the desaturated image
+  delete(image_bw.GetData());
   
 
   //--------------------------------------------------------------------------
