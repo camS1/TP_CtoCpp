@@ -17,13 +17,6 @@ img::img(void)
   u_char* data=new u_char;
 }
 
-/*img::img(int h, int w)
-{
-	heigth=h;
-  width=w;
-  u_char* data=new u_char [3 * w * h];
-}*/
-
 
 img::img(const img& tocopy)
 {
@@ -122,7 +115,6 @@ void img::ppm_shrink(int factor)
   int new_width   = (width) / factor;
   int new_height  = (heigth) / factor;
   
-  //u_char *new_image = (u_char *) malloc(3 * new_width * new_height * sizeof(*new_image));
 	u_char* new_image= new u_char [3 * new_width * new_height ]; 
 
   // Precompute factor^2 (for performance reasons)

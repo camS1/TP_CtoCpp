@@ -43,5 +43,4 @@ void ppm_read_from_file(img* picture, const char* namefile);
 void ppm_desaturate(img * picture);
 
 // Shrink image (of original size <width> * <height>) by factor <factor>
-// <width> and <height> are updated accordingly
 void ppm_shrink(img* picture, int factor);
