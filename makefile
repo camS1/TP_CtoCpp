@@ -1,6 +1,6 @@
 all:ppm
-ppm: ppm.c functionpicture.o
-	g++ -o ppm ppm.c functionpicture.o
-functionpicture.o:  functionpicture.h functionpicture.c
-	g++ -o functionpicture.o  functionpicture.c -c
+ppm: ppm.cpp functionpicture.o
+	g++ -o ppm ppm.cpp functionpicture.o
+functionpicture.o:  functionpicture.h functionpicture.cpp
+	g++ -o functionpicture.o  functionpicture.cpp -c
 
