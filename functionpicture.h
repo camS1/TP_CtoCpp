@@ -1,13 +1,30 @@
 //============================================================================
 //                           structure
 //============================================================================
-//creating structure for a ppm picture.
-typedef struct
+//creating a class for a ppm picture.
+
+class img
 {
-  int heigth;
-  int width;
-  u_char* data;//to stock the picture.
-}img;
+  public : 
+  	img(void);
+		img(const img& tocopy);//constructer by copy
+  	int Getheigth(void) const;
+  	int Getwidth(void) const;
+  	u_char* GetData(void) const;
+		void Setheigth(float Newheight);
+		void Setwidth(float Newwidth);
+		void ppm_write_to_file(const char * namefile);//to write a picture in a file namefile
+		void ppm_read_from_file( const char * namefile);//to read a picture from a file namefile
+		void ppm_desaturate();//to desaturate a picture
+		void ppm_shrink(int factor);//to shrink a picture
+		//no use of getters.
+
+  private : 
+    int heigth;
+  	int width;
+  	u_char* data;//to stock the picture.
+	
+};
 
 
 //============================================================================

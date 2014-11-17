@@ -22,12 +22,10 @@ int main(int argc, const char* argv[])//argc et argv par defaut pas utilise ici.
   int Newwidth=0;
   int Newheight=0;
   //creating a void picture
-  //img * image;
-  //image=(img*)malloc(sizeof(img));
-  img * image= new img; 
-  ppm_read_from_file(image,"gargouille.ppm");
-  Newwidth=image->width;
-  Newheight=image->heigth;
+  img image;
+  image.ppm_read_from_file("gargouille.ppm");
+  Newwidth=image.Getwidth();
+  Newheight=image.Getheigth();
   //--------------------------------------------------------------------------
   // Create a desaturated (B&W) copy of the image we've just read and
   // write it into "gagouille_BW.ppm"
@@ -37,26 +35,26 @@ int main(int argc, const char* argv[])//argc et argv par defaut pas utilise ici.
   int height_bw = height;
   u_char* image_bw = (u_char*) malloc(3 * width * height * sizeof(*image_bw));*/
   //creating a void picture
-  //img* image_bw;
-  //image_bw=(img*)malloc(sizeof(img));
-  img * image_bw= new img; 
-  image_bw->width=Newwidth;
-  image_bw->heigth=Newheight;
+  
+  img image_bw = img(image);
+  //image_bw.img(image);
+  //image_bw.width=Newwidth;
+  //image_bw.heigth=Newheight;
   //u_char* Newimage2= (u_char*) malloc(3 * image_bw->width * image_bw->heigth * sizeof(*Newimage2));
-  u_char * Newimage2= new u_char [3 * image_bw->width * image_bw->heigth ]; 
-  image_bw->data=Newimage2;
-  memcpy(image_bw->data, image->data, 3 * image_bw->width * image_bw->heigth * sizeof(*image_bw->data));
+  //u_char * Newimage2= new u_char [3 * image_bw.width * image_bw.heigth ]; 
+  //image_bw.data=Newimage2;
+  memcpy(image_bw.GetData(), image.GetData(), 3 * image_bw.Getwidth() * image_bw.Getheigth() * sizeof(*image_bw.GetData()));
 
   // Desaturate image_bw
-  ppm_desaturate(image_bw);
+  image_bw.ppm_desaturate();
 
   // Write the desaturated image into "gargouille_BW.ppm"
   //FILE* ppm_output = fopen("gargouille_BW.ppm", "wb");
-  ppm_write_to_file(*image_bw,"gargouille_BW.ppm");
+  image_bw.ppm_write_to_file("gargouille_BW.ppm");
   //fclose(ppm_output);
 
   // Free the desaturated image
-  free(image_bw->data);
+  free(image_bw.GetData());
   
 
   //--------------------------------------------------------------------------
@@ -67,27 +65,23 @@ int main(int argc, const char* argv[])//argc et argv par defaut pas utilise ici.
   int width_small  = Newwidth;
   int height_small = Newheight;
   
-    
   
-  //u_char* Newimage_small = NULL;
-
-  //img * image_small;
-  //image_small=(img*)malloc(sizeof(img));
-  img * image_small= new img; 
-  image_small->width=width_small; 
-  image_small->heigth=height_small;
+  img image_small=img(image);
+  //image_small.img(height_small,width_small);
+  //image_small.width=width_small; 
+  //image_small.heigth=height_small;
   //Newimage_small = (u_char*) malloc(3 * width_small * height_small * sizeof(*Newimage_small));
-  u_char * Newimage_small= new u_char [3 * width_small * height_small]; 
-  image_small->data=Newimage_small;
+  //u_char * Newimage_small= new u_char [3 * width_small * height_small]; 
+  //image_small.data=Newimage_small;
   
-  memcpy(image_small->data, image->data, 3 * image_small->width * image_small->heigth * sizeof(*image_small->data));
+  memcpy(image_small.GetData(), image.GetData(), 3 * image_small.Getwidth() * image_small.Getheigth() * sizeof(*image_small.GetData()));
   
   // Shrink image_small size 2-fold
-  ppm_shrink(image_small, 2);
+  image_small.ppm_shrink(2);
 
   // Write the desaturated image into "gargouille_small.ppm"
   //ppm_output = fopen("gargouille_small.ppm", "wb");
-  ppm_write_to_file(*image_small,"gargouille_small.ppm");
+  image_small.ppm_write_to_file("gargouille_small.ppm");
   //fclose(ppm_output););
 
   return 0;
